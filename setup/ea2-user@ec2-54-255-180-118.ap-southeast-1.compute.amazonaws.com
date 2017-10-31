@@ -10,7 +10,6 @@ sudo apt-get --assume-yes install software-properties-common
 wget "http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/cuda-repo-ubuntu1604_8.0.44-1_amd64.deb" -O "cuda-repo-ubuntu1604_8.0.44-1_amd64.deb"
 
 sudo dpkg -i cuda-repo-ubuntu1604_8.0.44-1_amd64.deb
-sudo apt-key adv --fetch-keys http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/7fa2af80.pub
 sudo apt-get update
 sudo apt-get -y install cuda
 sudo modprobe nvidia
@@ -28,7 +27,7 @@ conda install -y bcolz
 conda upgrade -y --all
 
 # install and configure theano
-pip install theano==0.8.2
+pip install theano
 echo "[global]
 device = gpu
 floatX = float32
@@ -45,13 +44,6 @@ echo '{
     "floatx": "float32",
     "backend": "theano"
 }' > ~/.keras/keras.json
-
-# echo '{
-#     "image_dim_ordering": "th",
-#     "epsilon": 1e-07,
-#     "floatx": "float32",
-#     "backend": "tensorflow"
-# }' > ~/.keras/keras.json
 
 # install cudnn libraries
 wget "http://files.fast.ai/files/cudnn.tgz" -O "cudnn.tgz"

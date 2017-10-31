@@ -6,15 +6,14 @@ sudo apt-get --assume-yes upgrade
 sudo apt-get --assume-yes install tmux build-essential gcc g++ make binutils
 sudo apt-get --assume-yes install software-properties-common
 
-# download and install GPU drivers
-wget "http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/cuda-repo-ubuntu1604_8.0.44-1_amd64.deb" -O "cuda-repo-ubuntu1604_8.0.44-1_amd64.deb"
+# # download and install GPU drivers
+# wget "http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/cuda-repo-ubuntu1604_8.0.44-1_amd64.deb" -O "cuda-repo-ubuntu1604_8.0.44-1_amd64.deb"
 
-sudo dpkg -i cuda-repo-ubuntu1604_8.0.44-1_amd64.deb
-sudo apt-key adv --fetch-keys http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/7fa2af80.pub
-sudo apt-get update
-sudo apt-get -y install cuda
-sudo modprobe nvidia
-nvidia-smi
+# sudo dpkg -i cuda-repo-ubuntu1604_8.0.44-1_amd64.deb
+# sudo apt-get update
+# sudo apt-get -y install cuda
+# sudo modprobe nvidia
+# nvidia-smi
 
 # install Anaconda for current user
 mkdir downloads
@@ -28,13 +27,13 @@ conda install -y bcolz
 conda upgrade -y --all
 
 # install and configure theano
-pip install theano==0.8.2
-echo "[global]
-device = gpu
-floatX = float32
+pip install theano
+# echo "[global]
+# device = cpu
+# floatX = float32
 
-[cuda]
-root = /usr/local/cuda" > ~/.theanorc
+# [cuda]
+# root = /usr/local/cuda" > ~/.theanorc
 
 # install and configure keras
 pip install keras==1.2.2
@@ -46,19 +45,12 @@ echo '{
     "backend": "theano"
 }' > ~/.keras/keras.json
 
-# echo '{
-#     "image_dim_ordering": "th",
-#     "epsilon": 1e-07,
-#     "floatx": "float32",
-#     "backend": "tensorflow"
-# }' > ~/.keras/keras.json
-
-# install cudnn libraries
-wget "http://files.fast.ai/files/cudnn.tgz" -O "cudnn.tgz"
-tar -zxf cudnn.tgz
-cd cuda
-sudo cp lib64/* /usr/local/cuda/lib64/
-sudo cp include/* /usr/local/cuda/include/
+# # install cudnn libraries
+# wget "http://files.fast.ai/files/cudnn.tgz" -O "cudnn.tgz"
+# tar -zxf cudnn.tgz
+# cd cuda
+# sudo cp lib64/* /usr/local/cuda/lib64/
+# sudo cp include/* /usr/local/cuda/include/
 
 # configure jupyter and prompt for password
 jupyter notebook --generate-config
